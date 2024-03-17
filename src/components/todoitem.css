@@ -1,7 +1,8 @@
 .completed {
     text-decoration: line-through;
-    color: #aaa;
-  }
+    color: #908e8e;
+    background: linear-gradient(to left, rgba(25, 116, 25, 0.745), rgba(0, 255, 157, 0.912)); /* Agrega un gradiente de fondo */
+}
   
   .addItem {
     display: flex;
@@ -16,7 +17,7 @@
     text-align: start;
     width: 21vw;
     padding: 10px;
-    font-size: 1rem;
+    font-size: 1.25rem;
     font-weight: bold;
 }
 
@@ -36,6 +37,7 @@
     border-radius: 50%;
     border: 2px solid #ffffff;
   }
+
   
   .addItem button {
     background-color: #e9f085f8;

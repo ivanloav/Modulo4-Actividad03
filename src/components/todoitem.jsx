@@ -40,8 +40,12 @@ export function TodoItem({ todo, onDelete, onComplete, onUpdate }) {
       ) : (
         <>
           <span>{todo.text}</span>
-          <button onClick={handleEdit}>✏️</button>
-          <button onClick={() => onDelete(todo.id)}>🗑️</button>
+          <button onClick={handleEdit} disabled={todo.isCompleted}>✏️</button>
+          <button onClick={() => {
+                if (window.confirm(`¿Estás segur@ de que quieres eliminar la tarea ${todo.text}?`)) {
+                    onDelete(todo.id)
+                }
+            }}>🗑️</button>
         </>
       )}
     </div>

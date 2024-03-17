@@ -10,3 +10,17 @@
   background-color: rgba(107, 107, 251, 0.683);
   border-radius: 1rem;
 }
+
+@media only screen and (768px <= width <= 1024px) {
+  #root {
+    width: 80vw;
+    height: 90vh;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  #root {
+    width: 80vw;
+    height: 90vh;
+  }
+}

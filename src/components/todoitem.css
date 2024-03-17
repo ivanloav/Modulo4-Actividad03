@@ -38,7 +38,6 @@
     border: 2px solid #ffffff;
   }
 
-  
   .addItem button {
     background-color: #e9f085f8;
     padding: 10px;
@@ -51,3 +50,38 @@
     background-color: white;
     color: black;
   }
+
+  @media only screen and (768px <= width <= 1024px) {
+    .addItem span, .editInput {
+      width: 80vw;
+    }
+
+    .custom-checkbox {
+        height: 30px;
+        width: 40px;
+      }
+    
+    .addItem button {
+        background-color: #e9f085f8;
+        padding: 10px;
+        margin: 7px;
+        width: 8vw;
+    }
+}
+  @media only screen and (max-width: 768px) {
+    .addItem span, .editInput {
+      width: 50vw;
+    }
+
+    .custom-checkbox {
+        height: 23px;
+        width: 25px;
+      }
+
+    .addItem button {
+        background-color: #e9f085f8;
+        padding: 10px;
+        margin: 7px;
+        width: 10vw;
+    }
+}

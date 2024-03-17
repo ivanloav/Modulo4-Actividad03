@@ -50,11 +50,17 @@ export function TodoList() {
                 ))}
             </div>
             <div className="toDoInput">
-                <input
-                    value={inputValue}
-                    onChange={(e) => setInputValue(e.target.value)}
-                    type="text" />
-                <button onClick={addTodo}>➕</button>
+                <form onSubmit={(e) => {
+                        e.preventDefault();
+                        addTodo();
+                    }}>
+                    <input
+                        value={inputValue}
+                        onChange={(e) => setInputValue(e.target.value)}
+                        type="text" 
+                    />
+                    <button type="submit">➕</button>
+                </form>
             </div>
         </div>
     </>

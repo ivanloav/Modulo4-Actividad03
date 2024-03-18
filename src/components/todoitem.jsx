@@ -1,24 +1,30 @@
-import React, { useState } from 'react';
-import './todoitem.css';
+import React, { useState } from 'react';  // Importa React y el hook useState de React
+import './todoitem.css';                  // Importa los estilos del componente TodoItem
 
+// Define y exporta la función TodoItem
 export function TodoItem({ todo, onDelete, onComplete, onUpdate }) {
+  // Define el estado para si se está editando y el texto de edición
   const [isEditing, setIsEditing] = useState(false);
   const [editText, setEditText] = useState(todo.text);
 
+  // Define la función para iniciar la edición
   const handleEdit = () => {
     setIsEditing(true);
   };
 
+  // Define la función para guardar la edición
   const handleSave = () => {
     onUpdate(todo.id, editText);
     setIsEditing(false);
   };
 
+  // Define la función para cancelar la edición
   const handleCancel = () => {
     setIsEditing(false);
     setEditText(todo.text);
   };
 
+  // Renderiza el componente
   return (
     <div className={`addItem ${todo.isCompleted ? 'completed' : ''}`}>
       <input
@@ -51,4 +57,3 @@ export function TodoItem({ todo, onDelete, onComplete, onUpdate }) {
     </div>
   );
 }
-

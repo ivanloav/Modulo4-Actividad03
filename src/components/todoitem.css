@@ -1,87 +1,79 @@
 .completed {
-    text-decoration: line-through;
-    color: #908e8e;
-    background: linear-gradient(to left, rgba(25, 116, 25, 0.745), rgba(0, 255, 157, 0.912)); /* Agrega un gradiente de fondo */
-}
-  
-  .addItem {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin: 10px 0;
-    border: 2px solid #000;
-    border-radius: 15px;
-}
-  
-  .addItem span, .editInput {
-    text-align: start;
-    width: 21vw;
-    padding: 10px;
-    font-size: 1.25rem;
-    font-weight: bold;
+  text-decoration: line-through;
+  color: #908e8e;
+  background: linear-gradient(to left, rgba(25, 116, 25, 0.745), rgba(0, 255, 157, 0.912));
 }
 
-  .custom-checkbox {
-    appearance: none;
-    -webkit-appearance: none;
-    height: 20px;
-    width: 20px;
-    background-color: #fff;
-    border-radius: 50%;
-    border: 2px solid #000;
-    cursor: pointer;
+.addItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 10px 0;
+  border: 2px solid #000;
+  border-radius: 15px;
+}
+
+.addItem span, .editInput {
+  text-align: start;
+  width: 40vw;
+  padding: 10px;
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.custom-checkbox {
+  appearance: none;
+  -webkit-appearance: none;
+  height: 20px;
+  width: 20px;
+  background-color: #fff;
+  border-radius: 50%;
+  border: 2px solid #000;
+  cursor: pointer;
+}
+
+.custom-checkbox:checked {
+  background-color: #000;
+  border-radius: 50%;
+  border: 2px solid #ffffff;
+}
+
+.addItem button {
+  background-color: #73eb71;
+  border: 2px solid white;
+  padding: 10px;
+  margin: 10px;
+  width: 2vw;
+}
+
+.editInput {
+  border-radius: 10px;
+  background-color: white;
+  color: black;
+}
+
+@media only screen and (768px <= width <= 1024px) {
+  .addItem span, .editInput {
+    width: 55vw;
   }
-  
-  .custom-checkbox:checked {
-    background-color: #000;
-    border-radius: 50%;
-    border: 2px solid #ffffff;
+ 
+  .addItem button {
+      background-color: #e9f085f8;
+      padding: 10px;
+      margin: 7px;
+      width: 6vw;
+  }
+}
+@media only screen and (max-width: 768px) {
+  .addItem span, .editInput {
+    width: 45vw;
+    font-size: 0.85rem;
   }
 
   .addItem button {
-    background-color: #e9f085f8;
-    padding: 10px;
-    margin: 10px;
-    width: 2vw;
+      background-color: #e9f085f8;
+      padding: 7px;
+      margin: 5px;
+      width: 10vw;
   }
-
-  .editInput {
-    border-radius: 10px;
-    background-color: white;
-    color: black;
-  }
-
-  @media only screen and (768px <= width <= 1024px) {
-    .addItem span, .editInput {
-      width: 80vw;
-    }
-
-    .custom-checkbox {
-        height: 30px;
-        width: 40px;
-      }
-    
-    .addItem button {
-        background-color: #e9f085f8;
-        padding: 10px;
-        margin: 7px;
-        width: 8vw;
-    }
-}
-  @media only screen and (max-width: 768px) {
-    .addItem span, .editInput {
-      width: 50vw;
-    }
-
-    .custom-checkbox {
-        height: 23px;
-        width: 25px;
-      }
-
-    .addItem button {
-        background-color: #e9f085f8;
-        padding: 10px;
-        margin: 7px;
-        width: 10vw;
-    }
 }

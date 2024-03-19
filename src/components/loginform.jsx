@@ -59,6 +59,7 @@ export function LoginForm({ onLoginSuccess }) {
             <input
                 type="email"
                 value={email}
+                // value='eve.holt@reqres.in'
                 onChange={(e) => setEmail(e.target.value)}
                 style={{ borderColor: error ? 'red' : 'default' }}
                 placeholder="Email"
@@ -66,6 +67,7 @@ export function LoginForm({ onLoginSuccess }) {
             <input
                 type="password"
                 value={password}
+                // value='cityslicka'
                 onChange={(e) => setPassword(e.target.value)}
                 style={{ borderColor: error ? 'red' : 'default' }}
                 placeholder="Password"

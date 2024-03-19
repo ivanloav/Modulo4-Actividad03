@@ -1,6 +1,6 @@
+import './todolist.css';                // Importa los estilos del componente TodoList
 import { useState } from "react";       // Importa el hook useState de React
 import { TodoItem } from './todoitem';  // Importa el componente TodoItem
-import './todolist.css';                // Importa los estilos del componente TodoList
 
 // Define y exporta la función TodoList
 export function TodoList() {

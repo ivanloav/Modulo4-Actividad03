@@ -4,7 +4,7 @@
     justify-content: center;
     align-items: center;
     width: 30vw;
-    height: 60vh;
+    height: 80vh;
 }
 
 .formLogin h1 {
@@ -30,6 +30,18 @@
     border-radius: 25px;
     box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.19), 0px 6px 6px rgba(0, 0, 0, 0.23);
     width: 100%;
+}
+
+.inputsButtonContainer button {
+    margin: 25px 0;
+    padding: 10px;
+    width: 50%;
+    background-color: #295dd6f8;
+    border: 1px solid #ccc;
+    background-image: radial-gradient(circle, #7896b3, #0f3f69);
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
 }
 
 .formLogin button {

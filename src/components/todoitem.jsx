@@ -1,5 +1,5 @@
-import React, { useState } from 'react';  // Importa React y el hook useState de React
 import './todoitem.css';                  // Importa los estilos del componente TodoItem
+import React, { useState } from 'react';  // Importa React y el hook useState de React
 
 // Define y exporta la función TodoItem
 export function TodoItem({ todo, onDelete, onComplete, onUpdate }) {

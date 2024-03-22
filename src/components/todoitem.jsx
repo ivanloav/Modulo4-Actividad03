@@ -51,7 +51,7 @@ export function TodoItem({ todo, onDelete, onComplete, onUpdate }) {
                 if (window.confirm(`¿Estás segur@ de que quieres eliminar la tarea ${todo.text}?`)) {
                     onDelete(todo.id)
                 }
-            }}>🗑️</button>
+            }} disabled={todo.isCompleted}>🗑️</button>
         </>
       )}
     </div>

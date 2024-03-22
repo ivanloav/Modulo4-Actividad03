@@ -1,27 +1,44 @@
 import './loginform.css';             // Importa los estilos del componente LoginForm
 
 // Importa React y el hook useState de React
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 // Define y exporta la función LoginForm
 export function LoginForm({ onLoginSuccess }) {
-  // Define el estado para el correo electrónico, la contraseña y el error
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [rememberMe, setRememberMe] = useState('');
   const [error, setError] = useState(false);
+  const [credentials, setCredentials] = useState({ email: '', password: '' });
+  const setEmail = (email) => setCredentials(prev => ({ ...prev, email }));
+  const setPassword = (password) => setCredentials(prev => ({ ...prev, password }));
+
+  // Carga las credenciales almacenadas en localStorage al montar el componente
+  useEffect(() => {
+    const storedCredentials = localStorage.getItem('credentials');
+    if (storedCredentials) {
+      const parsedCredentials = JSON.parse(storedCredentials);
+      setCredentials({ email: parsedCredentials.username, password: parsedCredentials.password });
+      setRememberMe(true);
+    }
+  }, []);
 
   // Define la función que se ejecutará cuando se envíe el formulario
   const handleSubmit = async (event) => {
     // Previene la recarga de la página al enviar el formulario
     event.preventDefault();
 
+    if (rememberMe) {
+      localStorage.setItem('credentials', JSON.stringify({ username: credentials.email, password: credentials.password }));
+    } else {
+      localStorage.removeItem('credentials');
+    }
+
     // Resetea el estado de error en cada envío
     setError(false);
 
     // Construye el objeto de datos del formulario
     const loginData = {
-      email: email,
-      password: password
+      email: credentials.email,
+      password: credentials.password
     };
 
     // Configura las opciones de la solicitud fetch
@@ -58,7 +75,7 @@ export function LoginForm({ onLoginSuccess }) {
         <div className='inputsButtonContainer'>
             <input
                 type="email"
-                value={email}
+                value={credentials.email}
                 // value='eve.holt@reqres.in'
                 onChange={(e) => setEmail(e.target.value)}
                 style={{ borderColor: error ? 'red' : 'default' }}
@@ -66,12 +83,21 @@ export function LoginForm({ onLoginSuccess }) {
             />
             <input
                 type="password"
-                value={password}
+                value={credentials.password}
                 // value='cityslicka'
                 onChange={(e) => setPassword(e.target.value)}
                 style={{ borderColor: error ? 'red' : 'default' }}
                 placeholder="Password"
             />
+            <label className='rememberMe-container'>
+              Recordar credenciales
+              <input
+                className='rememberMe-checkbox'
+                type="checkbox"
+                checked={rememberMe}
+                onChange={(e) => setRememberMe(e.target.checked)}
+              />
+            </label>
             <button type="submit">🔑&nbsp;&nbsp;&nbsp;Login</button>
         </div>
     </form>

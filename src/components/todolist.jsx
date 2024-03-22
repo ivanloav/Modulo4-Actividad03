@@ -63,7 +63,7 @@ export function TodoList() {
                 ))}
             </div>
             <div className="toDoInput">
-                <form onSubmit={(e) => {
+                <form onSubmit={(e) => {  /*Formulario que envuelve el input y el botón para poder utilizar la tecla Enter */
                         e.preventDefault();
                         addTodo();
                     }}>

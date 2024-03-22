@@ -4,6 +4,11 @@
   background: linear-gradient(to left, rgba(25, 116, 25, 0.745), rgba(0, 255, 157, 0.912));
 }
 
+.completed button:hover {
+  cursor: auto;
+  border: 2px solid #ffffff;
+}
+
 .addItem {
   display: flex;
   align-items: center;

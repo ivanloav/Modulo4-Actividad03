@@ -2,6 +2,7 @@ import './loginform.css';                     // Importa los estilos del compone
 import { useState, useEffect } from 'react';  // Importa los hooks useState y useEffect de React
 import { postLogin } from '../services/api';  // Importa la función postLogin del archivo api.js
 import PropTypes from 'prop-types';            // Importa el módulo PropTypes
+import { readFromLocalStorage, writeToLocalStorage } from '../services/local-storage';   // Importa las funciones readFromLocalStorage y writeToLocalStorage del archivo local-storage.js
 
 export function LoginForm({ onLoginSuccess }) {
   // Definición de estados
@@ -16,11 +17,10 @@ export function LoginForm({ onLoginSuccess }) {
 
   // Efecto para cargar las credenciales almacenadas en localStorage
   useEffect(() => {
-    const storedCredentials = localStorage.getItem('credentials');
+    const { username, password } = readFromLocalStorage();
 
-    if (storedCredentials) {
-      const parsedCredentials = JSON.parse(storedCredentials);
-      setCredentials({ email: parsedCredentials.username, password: parsedCredentials.password });
+    if (username && password) {
+      setCredentials({ email: username, password });
       setRememberMe(true);
     }
   }, []);
@@ -35,7 +35,7 @@ export function LoginForm({ onLoginSuccess }) {
 
       // Almacenar las credenciales en localStorage si se ha marcado el checkbox o eliminarlas si no
       if (rememberMe) {
-        localStorage.setItem('credentials', JSON.stringify({ username: credentials.email, password: credentials.password }));
+        writeToLocalStorage(credentials);
       } else {
         localStorage.removeItem('credentials');
       }

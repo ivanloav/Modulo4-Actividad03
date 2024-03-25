@@ -80,6 +80,8 @@ export function LoginForm({ onLoginSuccess }) {
         <div className='inputsButtonContainer'>
           <input
             type="email"
+            name="email"
+            autoFocus
             value={credentials.email}
             onChange={e => setEmail(e.target.value)}
             style={{ borderColor: error ? 'red' : 'default' }}
@@ -87,6 +89,7 @@ export function LoginForm({ onLoginSuccess }) {
           />
           <input
             type="password"
+            name="password"
             value={credentials.password}
             onChange={e => setPassword(e.target.value)}
             style={{ borderColor: error ? 'red' : 'default' }}

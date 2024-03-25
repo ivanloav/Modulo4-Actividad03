@@ -1,5 +1,7 @@
 import './loginform.css';                     // Importa los estilos del componente LoginForm
 import { useState, useEffect } from 'react';  // Importa los hooks useState y useEffect de React
+import { postLogin } from '../services/api';  // Importa la función postLogin del archivo api.js
+import PropTypes from 'prop-types';            // Importa el módulo PropTypes
 
 export function LoginForm({ onLoginSuccess }) {
   // Definición de estados
@@ -15,7 +17,7 @@ export function LoginForm({ onLoginSuccess }) {
   // Efecto para cargar las credenciales almacenadas en localStorage
   useEffect(() => {
     const storedCredentials = localStorage.getItem('credentials');
-    
+
     if (storedCredentials) {
       const parsedCredentials = JSON.parse(storedCredentials);
       setCredentials({ email: parsedCredentials.username, password: parsedCredentials.password });
@@ -37,38 +39,25 @@ export function LoginForm({ onLoginSuccess }) {
       } else {
         localStorage.removeItem('credentials');
       }
-      
+
       setError(false);
 
       // Realizar la petición de inicio de sesión
       try {
-        // Configurar las opciones de la petición
-        const requestOptions = {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email: credentials.email, password: credentials.password })
-        };
-        
-        // Realizar la petición a la API
-        const response = await fetch('https://reqres.in/api/login', requestOptions);
-        const data = await response.json();
-        
-        if (!response.ok) {
-          throw new Error(data.error);
-        }
-        
+        await postLogin(credentials);
+
         onLoginSuccess();
       } catch (err) {
         setError(true);
         alert('Error de inicio de sesión: ' + err.message);
       }
-      
+
       setIsLoading(false);
     }, 1000);
   };
 
   // Renderiza el componente
-  return (                                                                                   
+  return (
     <div>
       {isLoading && (
         <div className="loadingOverlay">
@@ -110,3 +99,7 @@ export function LoginForm({ onLoginSuccess }) {
     </div>
   );
 }
+
+LoginForm.propTypes = {
+  onLoginSuccess: PropTypes.func.isRequired,
+};

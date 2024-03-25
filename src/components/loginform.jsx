@@ -1,5 +1,8 @@
 import './loginform.css';                     // Importa los estilos del componente LoginForm
 import { useState, useEffect } from 'react';  // Importa los hooks useState y useEffect de React
+import { postLogin } from '../services/api';  // Importa la función postLogin del archivo api.js
+import PropTypes from 'prop-types';            // Importa el módulo PropTypes
+import { readFromLocalStorage, writeToLocalStorage } from '../services/local-storage';   // Importa las funciones readFromLocalStorage y writeToLocalStorage del archivo local-storage.js
 
 export function LoginForm({ onLoginSuccess }) {
   // Definición de estados
@@ -14,11 +17,10 @@ export function LoginForm({ onLoginSuccess }) {
 
   // Efecto para cargar las credenciales almacenadas en localStorage
   useEffect(() => {
-    const storedCredentials = localStorage.getItem('credentials');
-    
-    if (storedCredentials) {
-      const parsedCredentials = JSON.parse(storedCredentials);
-      setCredentials({ email: parsedCredentials.username, password: parsedCredentials.password });
+    const { username, password } = readFromLocalStorage();
+
+    if (username && password) {
+      setCredentials({ email: username, password });
       setRememberMe(true);
     }
   }, []);
@@ -33,42 +35,29 @@ export function LoginForm({ onLoginSuccess }) {
 
       // Almacenar las credenciales en localStorage si se ha marcado el checkbox o eliminarlas si no
       if (rememberMe) {
-        localStorage.setItem('credentials', JSON.stringify({ username: credentials.email, password: credentials.password }));
+        writeToLocalStorage(credentials);
       } else {
         localStorage.removeItem('credentials');
       }
-      
+
       setError(false);
 
       // Realizar la petición de inicio de sesión
       try {
-        // Configurar las opciones de la petición
-        const requestOptions = {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email: credentials.email, password: credentials.password })
-        };
-        
-        // Realizar la petición a la API
-        const response = await fetch('https://reqres.in/api/login', requestOptions);
-        const data = await response.json();
-        
-        if (!response.ok) {
-          throw new Error(data.error);
-        }
-        
+        await postLogin(credentials);
+
         onLoginSuccess();
       } catch (err) {
         setError(true);
         alert('Error de inicio de sesión: ' + err.message);
       }
-      
+
       setIsLoading(false);
     }, 1000);
   };
 
   // Renderiza el componente
-  return (                                                                                   
+  return (
     <div>
       {isLoading && (
         <div className="loadingOverlay">
@@ -80,6 +69,8 @@ export function LoginForm({ onLoginSuccess }) {
         <div className='inputsButtonContainer'>
           <input
             type="email"
+            name="email"
+            autoFocus
             value={credentials.email}
             onChange={e => setEmail(e.target.value)}
             style={{ borderColor: error ? 'red' : 'default' }}
@@ -87,6 +78,7 @@ export function LoginForm({ onLoginSuccess }) {
           />
           <input
             type="password"
+            name="password"
             value={credentials.password}
             onChange={e => setPassword(e.target.value)}
             style={{ borderColor: error ? 'red' : 'default' }}
@@ -107,3 +99,7 @@ export function LoginForm({ onLoginSuccess }) {
     </div>
   );
 }
+
+LoginForm.propTypes = {
+  onLoginSuccess: PropTypes.func.isRequired,
+};
